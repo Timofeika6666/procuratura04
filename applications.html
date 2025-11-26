@@ -7,6 +7,28 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <style>
+        .application-type-card {
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            height: 100%;
+        }
+        .application-type-card:hover {
+            transform: translateY(-5px);
+            border-color: #003366;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+        }
+        .form-section {
+            display: none;
+        }
+        .form-section.active {
+            display: block;
+        }
+        .back-to-types {
+            margin-bottom: 2rem;
+        }
+    </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
@@ -48,161 +70,445 @@
 
     <section class="py-5">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-8 mx-auto">
-                    <!-- Інформація про подання заяв -->
-                    <div class="card mb-5">
-                        <div class="card-header bg-warning text-dark">
-                            <h5 class="mb-0"><i class="fas fa-exclamation-triangle me-2"></i>Важлива інформація</h5>
-                        </div>
-                        <div class="card-body">
-                            <p>Перш ніж подати заяву, будь ласка, ознайомтесь з такою інформацією:</p>
-                            <ul>
-                                <li>Заява повинна містити правдиву та перевірену інформацію</li>
-                                <li>Усі поля форми є обов'язковими для заповнення</li>
-                                <li>За надання завідомо неправдивих відомостей передбачена відповідальність</li>
-                                <li>Термін розгляду заяви - до 30 днів</li>
-                                <li>Про результат розгляду вас буде повідомлено за вказаними контактами</li>
-                            </ul>
-                        </div>
+            <!-- Види заяв -->
+            <div id="applicationTypes">
+                <div class="row mb-5">
+                    <div class="col-12">
+                        <h2 class="section-title mb-4">Оберіть тип заяви</h2>
                     </div>
+                </div>
 
-                    <!-- Форма вибору типу заяви -->
-                    <div class="card mb-4">
-                        <div class="card-header">
-                            <h5 class="mb-0">Оберіть тип заяви</h5>
-                        </div>
-                        <div class="card-body">
-                            <div class="application-type mb-4">
-                                <h5><i class="fas fa-store me-2"></i>Заява на рейд на Центральний ринок</h5>
-                                <p>Подається у разі виявлення порушень торгівельних правил, санітарних норм або інших правопорушень на території Центрального ринку.</p>
-                                <button class="btn btn-primary select-application" data-type="Рейд на Центральний ринок">
-                                    Обрати цей тип
-                                </button>
-                            </div>
-                            
-                            <div class="application-type mb-4">
-                                <h5><i class="fas fa-shield-alt me-2"></i>Заява на рейд на Картель</h5>
-                                <p>Подається у разі підозри в діяльності організованих злочинних угруповань, незаконному обігу наркотиків або інших серйозних правопорушень.</p>
-                                <button class="btn btn-primary select-application" data-type="Рейд на Картель">
-                                    Обрати цей тип
-                                </button>
-                            </div>
-                            
-                            <div class="application-type mb-4">
-                                <h5><i class="fas fa-gavel me-2"></i>Заява у прокуратуру</h5>
-                                <p>Загальна форма заяви до органів прокуратури з будь-яких питань, що входять до її компетенції.</p>
-                                <button class="btn btn-primary select-application" data-type="Заява у прокуратуру">
-                                    Обрати цей тип
-                                </button>
+                <div class="row g-4">
+                    <!-- Заява на проведення рейду -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card application-type-card" data-type="raid">
+                            <div class="card-body text-center">
+                                <i class="fas fa-police-car fa-3x text-primary mb-3"></i>
+                                <h5 class="card-title">Заява на проведення рейду</h5>
+                                <p class="card-text">Подача заяви для проведення спеціального рейду</p>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Форма заяви -->
-                    <div class="card" id="applicationFormCard" style="display: none;">
+                    <!-- Подання клопотання до прокуратури -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card application-type-card" data-type="petition">
+                            <div class="card-body text-center">
+                                <i class="fas fa-file-contract fa-3x text-primary mb-3"></i>
+                                <h5 class="card-title">Подання клопотання до прокуратури</h5>
+                                <p class="card-text">Офіційне клопотання до органів прокуратури</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Скарга на працівника -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card application-type-card" data-type="complaint">
+                            <div class="card-body text-center">
+                                <i class="fas fa-user-shield fa-3x text-primary mb-3"></i>
+                                <h5 class="card-title">Скарга на працівника державної структури</h5>
+                                <p class="card-text">Подача скарги на дії державного службовця або громадянина</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Заявка до прокуратури -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card application-type-card" data-type="prosecutor_request">
+                            <div class="card-body text-center">
+                                <i class="fas fa-gavel fa-3x text-primary mb-3"></i>
+                                <h5 class="card-title">Заявка до прокуратури</h5>
+                                <p class="card-text">Загальна заявка до органів прокуратури</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Заява на обшук власності -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card application-type-card" data-type="property_search">
+                            <div class="card-body text-center">
+                                <i class="fas fa-search fa-3x text-primary mb-3"></i>
+                                <h5 class="card-title">Заява на обшук приватної власності</h5>
+                                <p class="card-text">Заява на проведення обшуку конкретної приватної власності</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Заява на обшук і затримання -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card application-type-card" data-type="search_arrest">
+                            <div class="card-body text-center">
+                                <i class="fas fa-handcuffs fa-3x text-primary mb-3"></i>
+                                <h5 class="card-title">Заява на обшук і затримання</h5>
+                                <p class="card-text">Заява на проведення обшуку та затримання особи</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Заява на оточення території -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card application-type-card" data-type="territory_surround">
+                            <div class="card-body text-center">
+                                <i class="fas fa-map-marked-alt fa-3x text-primary mb-3"></i>
+                                <h5 class="card-title">Заява на оточення території</h5>
+                                <p class="card-text">Заява на оточення та контроль певної території</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Форми заяв -->
+            <div id="applicationForms">
+                <!-- Форма 1: Заява на проведення рейду -->
+                <div id="raidForm" class="form-section">
+                    <div class="back-to-types">
+                        <button class="btn btn-outline-secondary" onclick="showApplicationTypes()">
+                            <i class="fas fa-arrow-left me-2"></i>Назад до вибору заяв
+                        </button>
+                    </div>
+                    
+                    <div class="card">
                         <div class="card-header">
-                            <h5 class="mb-0">Форма заяви: <span id="selectedApplicationType"></span></h5>
+                            <h4 class="mb-0"><i class="fas fa-police-car me-2"></i>Заява на проведення рейду</h4>
                         </div>
                         <div class="card-body">
-                            <form id="applicationForm">
-                                <div class="mb-3">
-                                    <label for="applicationType" class="form-label">Тип заяви *</label>
-                                    <input type="text" class="form-control" id="applicationType" readonly required>
+                            <form id="raidApplicationForm" action="https://formspree.io/f/mvojzpqz" method="POST">
+                                <input type="hidden" name="_subject" value="Заява на проведення рейду">
+                                <input type="hidden" name="_replyto" value="zubkotimofey@gmail.com">
+                                
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">ПІБ *</label>
+                                        <input type="text" class="form-control" name="full_name" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Причина рейду *</label>
+                                        <input type="text" class="form-control" name="raid_reason" required>
+                                    </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
-                                        <label for="lastName" class="form-label">Прізвище *</label>
-                                        <input type="text" class="form-control" id="lastName" required>
+                                        <label class="form-label">Дата проведення рейду *</label>
+                                        <input type="date" class="form-control" name="raid_date" required>
                                     </div>
                                     <div class="col-md-6 mb-3">
-                                        <label for="firstName" class="form-label">Ім'я *</label>
-                                        <input type="text" class="form-control" id="firstName" required>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-6 mb-3">
-                                        <label for="middleName" class="form-label">По батькові</label>
-                                        <input type="text" class="form-control" id="middleName">
-                                    </div>
-                                    <div class="col-md-6 mb-3">
-                                        <label for="phone" class="form-label">Телефон *</label>
-                                        <input type="tel" class="form-control" id="phone" required>
+                                        <label class="form-label">Зв'язок з вами (Discord/Telegram) *</label>
+                                        <input type="text" class="form-control" name="contact" required placeholder="@username">
                                     </div>
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="email" class="form-label">Email *</label>
-                                    <input type="email" class="form-control" id="email" required>
+                                    <label class="form-label">Докази порушення або причини проведення рейду *</label>
+                                    <textarea class="form-control" name="evidence" rows="4" required></textarea>
                                 </div>
 
-                                <div class="mb-3">
-                                    <label for="address" class="form-label">Адреса проживання *</label>
-                                    <input type="text" class="form-control" id="address" required>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="subject" class="form-label">Тема звернення *</label>
-                                    <input type="text" class="form-control" id="subject" required>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="description" class="form-label">Опис ситуації *</label>
-                                    <textarea class="form-control" id="description" rows="6" required 
-                                              placeholder="Детально опишіть ситуацію, вкажіть місце, час, обставини події, інші важливі деталі..."></textarea>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="witnesses" class="form-label">Свідки (якщо є)</label>
-                                    <textarea class="form-control" id="witnesses" rows="2" 
-                                              placeholder="ПІБ свідків, їх контактні дані..."></textarea>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="file" class="form-label">Додати доказові матеріали</label>
-                                    <input type="file" class="form-control" id="file" multiple>
-                                    <div class="form-text">Можна завантажити фото, відео, документи (макс. розмір файлу - 10MB)</div>
-                                </div>
-
-                                <div class="mb-3 form-check">
-                                    <input type="checkbox" class="form-check-input" id="consent" required>
-                                    <label class="form-check-label" for="consent">
-                                        Я погоджуюсь з обробкою моїх персональних даних та підтверджую достовірність наданої інформації *
-                                    </label>
-                                </div>
-
-                                <div class="d-grid gap-2">
-                                    <button type="submit" class="btn btn-primary btn-lg">Надіслати заяву</button>
-                                    <button type="button" class="btn btn-outline-secondary" id="cancelForm">Скасувати</button>
-                                </div>
+                                <button type="submit" class="btn btn-primary btn-lg">Надіслати заяву</button>
                             </form>
                         </div>
                     </div>
+                </div>
 
-                    <!-- Контактна інформація -->
-                    <div class="card mt-5">
-                        <div class="card-body text-center">
-                            <h5>Альтернативні способи звернення</h5>
-                            <p>Якщо у вас виникають складнощі з заповненням електронної форми, ви можете звернутися до нас іншими способами:</p>
-                            <div class="row mt-4">
-                                <div class="col-md-4">
-                                    <i class="fas fa-envelope fa-2x text-primary mb-3"></i>
-                                    <h6>Поштова адреса</h6>
-                                    <p>вул. Липська, 15, м. Київ, 01001</p>
+                <!-- Форма 2: Подання клопотання до прокуратури -->
+                <div id="petitionForm" class="form-section">
+                    <div class="back-to-types">
+                        <button class="btn btn-outline-secondary" onclick="showApplicationTypes()">
+                            <i class="fas fa-arrow-left me-2"></i>Назад до вибору заяв
+                        </button>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="mb-0"><i class="fas fa-file-contract me-2"></i>Подання клопотання до прокуратури</h4>
+                        </div>
+                        <div class="card-body">
+                            <form id="petitionForm" action="https://formspree.io/f/mvojzpqz" method="POST">
+                                <input type="hidden" name="_subject" value="Клопотання до прокуратури">
+                                <input type="hidden" name="_replyto" value="zubkotimofey@gmail.com">
+                                
+                                <div class="mb-3">
+                                    <label class="form-label">ПІБ *</label>
+                                    <input type="text" class="form-control" name="full_name" required>
                                 </div>
-                                <div class="col-md-4">
-                                    <i class="fas fa-phone fa-2x text-primary mb-3"></i>
-                                    <h6>Телефон гарячої лінії</h6>
-                                    <p>+38 (044) 123-45-67</p>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Текст клопотання *</label>
+                                    <textarea class="form-control" name="petition_text" rows="8" required placeholder="Детально опишіть суть вашого клопотання..."></textarea>
                                 </div>
-                                <div class="col-md-4">
-                                    <i class="fas fa-user fa-2x text-primary mb-3"></i>
-                                    <h6>Особистий прийом</h6>
-                                    <p>Пн-Пт: 9:00-18:00</p>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Зв'язок з вами (Discord/Telegram) *</label>
+                                    <input type="text" class="form-control" name="contact" required placeholder="@username">
                                 </div>
-                            </div>
+
+                                <button type="submit" class="btn btn-primary btn-lg">Надіслати клопотання</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Форма 3: Скарга на працівника -->
+                <div id="complaintForm" class="form-section">
+                    <div class="back-to-types">
+                        <button class="btn btn-outline-secondary" onclick="showApplicationTypes()">
+                            <i class="fas fa-arrow-left me-2"></i>Назад до вибору заяв
+                        </button>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="mb-0"><i class="fas fa-user-shield me-2"></i>Скарга на працівника державної структури або громадянина</h4>
+                        </div>
+                        <div class="card-body">
+                            <form id="complaintForm" action="https://formspree.io/f/mvojzpqz" method="POST">
+                                <input type="hidden" name="_subject" value="Скарга на працівника">
+                                <input type="hidden" name="_replyto" value="zubkotimofey@gmail.com">
+                                
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Ваше ПІБ *</label>
+                                        <input type="text" class="form-control" name="full_name" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">ПІБ особи, на яку подається скарга *</label>
+                                        <input type="text" class="form-control" name="target_name" required>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Посада або статус особи</label>
+                                    <input type="text" class="form-control" name="target_position" placeholder="Державний службовець, громадянин, тощо">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Опис порушення *</label>
+                                    <textarea class="form-control" name="violation_description" rows="6" required></textarea>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Докази порушення</label>
+                                    <textarea class="form-control" name="evidence" rows="3"></textarea>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Зв'язок з вами (Discord/Telegram) *</label>
+                                    <input type="text" class="form-control" name="contact" required placeholder="@username">
+                                </div>
+
+                                <button type="submit" class="btn btn-primary btn-lg">Надіслати скаргу</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Форма 4: Заявка до прокуратури -->
+                <div id="prosecutorRequestForm" class="form-section">
+                    <div class="back-to-types">
+                        <button class="btn btn-outline-secondary" onclick="showApplicationTypes()">
+                            <i class="fas fa-arrow-left me-2"></i>Назад до вибору заяв
+                        </button>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="mb-0"><i class="fas fa-gavel me-2"></i>Заявка до прокуратури</h4>
+                        </div>
+                        <div class="card-body">
+                            <form id="prosecutorRequestForm" action="https://formspree.io/f/mvojzpqz" method="POST">
+                                <input type="hidden" name="_subject" value="Заявка до прокуратури">
+                                <input type="hidden" name="_replyto" value="zubkotimofey@gmail.com">
+                                
+                                <div class="mb-3">
+                                    <label class="form-label">ПІБ *</label>
+                                    <input type="text" class="form-control" name="full_name" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Тема звернення *</label>
+                                    <input type="text" class="form-control" name="subject" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Детальний опис ситуації *</label>
+                                    <textarea class="form-control" name="situation_description" rows="8" required></textarea>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Ваші пропозиції або вимоги</label>
+                                    <textarea class="form-control" name="proposals" rows="3"></textarea>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Зв'язок з вами (Discord/Telegram) *</label>
+                                    <input type="text" class="form-control" name="contact" required placeholder="@username">
+                                </div>
+
+                                <button type="submit" class="btn btn-primary btn-lg">Надіслати заявку</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Форма 5: Заява на обшук приватної власності -->
+                <div id="propertySearchForm" class="form-section">
+                    <div class="back-to-types">
+                        <button class="btn btn-outline-secondary" onclick="showApplicationTypes()">
+                            <i class="fas fa-arrow-left me-2"></i>Назад до вибору заяв
+                        </button>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="mb-0"><i class="fas fa-search me-2"></i>Заява на обшук приватної власності</h4>
+                        </div>
+                        <div class="card-body">
+                            <form id="propertySearchForm" action="https://formspree.io/f/mvojzpqz" method="POST">
+                                <input type="hidden" name="_subject" value="Заява на обшук приватної власності">
+                                <input type="hidden" name="_replyto" value="zubkotimofey@gmail.com">
+                                
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Ваше ПІБ *</label>
+                                        <input type="text" class="form-control" name="full_name" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">ПІБ власника *</label>
+                                        <input type="text" class="form-control" name="owner_name" required>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Причина обшуку *</label>
+                                    <textarea class="form-control" name="search_reason" rows="3" required></textarea>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Тип власності *</label>
+                                        <select class="form-select" name="property_type" required>
+                                            <option value="">Оберіть тип...</option>
+                                            <option value="automobile">Автомобіль</option>
+                                            <option value="house">Будинок</option>
+                                            <option value="apartment">Квартира</option>
+                                            <option value="business">Бізнес</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Номер/Адреса *</label>
+                                        <input type="text" class="form-control" name="property_identifier" required placeholder="Номер авто, адреса будинку, тощо">
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Доказова база *</label>
+                                    <textarea class="form-control" name="evidence" rows="4" required></textarea>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Зв'язок з вами (Discord/Telegram) *</label>
+                                    <input type="text" class="form-control" name="contact" required placeholder="@username">
+                                </div>
+
+                                <button type="submit" class="btn btn-primary btn-lg">Надіслати заяву</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Форма 6: Заява на обшук і затримання -->
+                <div id="searchArrestForm" class="form-section">
+                    <div class="back-to-types">
+                        <button class="btn btn-outline-secondary" onclick="showApplicationTypes()">
+                            <i class="fas fa-arrow-left me-2"></i>Назад до вибору заяв
+                        </button>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="mb-0"><i class="fas fa-handcuffs me-2"></i>Заява на обшук і затримання</h4>
+                        </div>
+                        <div class="card-body">
+                            <form id="searchArrestForm" action="https://formspree.io/f/mvojzpqz" method="POST">
+                                <input type="hidden" name="_subject" value="Заява на обшук і затримання">
+                                <input type="hidden" name="_replyto" value="zubkotimofey@gmail.com">
+                                
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Ваше ПІБ *</label>
+                                        <input type="text" class="form-control" name="full_name" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">ПІБ людини для затримання *</label>
+                                        <input type="text" class="form-control" name="target_name" required>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Причина затримання/обшуку *</label>
+                                    <textarea class="form-control" name="arrest_reason" rows="4" required></textarea>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Докази порушення *</label>
+                                    <textarea class="form-control" name="evidence" rows="4" required></textarea>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Зв'язок з вами (Discord/Telegram) *</label>
+                                    <input type="text" class="form-control" name="contact" required placeholder="@username">
+                                </div>
+
+                                <button type="submit" class="btn btn-primary btn-lg">Надіслати заяву</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Форма 7: Заява на оточення території -->
+                <div id="territorySurroundForm" class="form-section">
+                    <div class="back-to-types">
+                        <button class="btn btn-outline-secondary" onclick="showApplicationTypes()">
+                            <i class="fas fa-arrow-left me-2"></i>Назад до вибору заяв
+                        </button>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="mb-0"><i class="fas fa-map-marked-alt me-2"></i>Заява на оточення території</h4>
+                        </div>
+                        <div class="card-body">
+                            <form id="territorySurroundForm" action="https://formspree.io/f/mvojzpqz" method="POST">
+                                <input type="hidden" name="_subject" value="Заява на оточення території">
+                                <input type="hidden" name="_replyto" value="zubkotimofey@gmail.com">
+                                
+                                <div class="mb-3">
+                                    <label class="form-label">Ваше ПІБ *</label>
+                                    <input type="text" class="form-control" name="full_name" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Територія для оточення *</label>
+                                    <textarea class="form-control" name="territory" rows="3" required placeholder="Детально опишіть територію, адресу, координати..."></textarea>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Причина оточення *</label>
+                                    <textarea class="form-control" name="surround_reason" rows="4" required></textarea>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Докази *</label>
+                                    <textarea class="form-control" name="evidence" rows="4" required></textarea>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Зв'язок з вами (Discord/Telegram) *</label>
+                                    <input type="text" class="form-control" name="contact" required placeholder="@username">
+                                </div>
+
+                                <button type="submit" class="btn btn-primary btn-lg">Надіслати заяву</button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -236,67 +542,54 @@
         </div>
     </footer>
 
-    <!-- Модальне вікно підтвердження -->
-    <div class="modal fade" id="successModal" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Заяву успішно подано!</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="text-center">
-                        <i class="fas fa-check-circle fa-3x text-success mb-3"></i>
-                        <p>Ваша заява отримана та зареєстрована під номером <strong id="applicationNumber"></strong>.</p>
-                        <p>Ми розглянемо її протягом 30 днів та повідомимо вас про результат за вказаними контактами.</p>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Зрозуміло</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Обробка вибору типу заяви
-        document.querySelectorAll('.select-application').forEach(button => {
-            button.addEventListener('click', function() {
-                const applicationType = this.getAttribute('data-type');
-                document.getElementById('applicationType').value = applicationType;
-                document.getElementById('selectedApplicationType').textContent = applicationType;
-                document.getElementById('applicationFormCard').style.display = 'block';
-                
-                // Прокрутка до форми
-                document.getElementById('applicationFormCard').scrollIntoView({
-                    behavior: 'smooth'
-                });
+        // Показати види заяв
+        function showApplicationTypes() {
+            document.getElementById('applicationTypes').style.display = 'block';
+            document.getElementById('applicationForms').style.display = 'none';
+        }
+
+        // Показати конкретну форму
+        function showApplicationForm(formType) {
+            document.getElementById('applicationTypes').style.display = 'none';
+            document.getElementById('applicationForms').style.display = 'block';
+            
+            // Приховати всі форми
+            const forms = document.querySelectorAll('.form-section');
+            forms.forEach(form => form.classList.remove('active'));
+            
+            // Показати потрібну форму
+            document.getElementById(formType + 'Form').classList.add('active');
+        }
+
+        // Обробка кліку на тип заяви
+        document.querySelectorAll('.application-type-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const formType = this.getAttribute('data-type');
+                showApplicationForm(formType);
             });
         });
 
-        // Скасування форми
-        document.getElementById('cancelForm').addEventListener('click', function() {
-            document.getElementById('applicationFormCard').style.display = 'none';
-            document.getElementById('applicationForm').reset();
+        // Обробка відправки форм
+        document.querySelectorAll('form').forEach(form => {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Тут буде відправка на Formspree
+                this.submit();
+                
+                // Показати повідомлення про успіх
+                alert('Заяву успішно відправлено! Ми зв\'яжемося з вами найближчим часом.');
+                
+                // Повернутися до вибору заяв
+                showApplicationTypes();
+                this.reset();
+            });
         });
 
-        // Відправка форми
-        document.getElementById('applicationForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Генерація номера заяви
-            const appNumber = 'APP-' + Date.now();
-            document.getElementById('applicationNumber').textContent = appNumber;
-            
-            // Показ модального вікна
-            const successModal = new bootstrap.Modal(document.getElementById('successModal'));
-            successModal.show();
-            
-            // Скидання форми
-            this.reset();
-            document.getElementById('applicationFormCard').style.display = 'none';
-        });
+        // Спочатку показати тільки види заяв
+        showApplicationTypes();
     </script>
 </body>
 </html>
