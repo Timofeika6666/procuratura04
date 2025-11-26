@@ -7,6 +7,20 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <style>
+        .order-item {
+            transition: all 0.3s ease;
+        }
+        .order-item.hidden {
+            display: none !important;
+        }
+        .no-results {
+            display: none;
+            text-align: center;
+            padding: 3rem;
+            color: #6c757d;
+        }
+    </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
@@ -47,12 +61,12 @@
     </section>
 
     <section class="py-5">
-    <div class="container">
-      <div class="row mb-4">
+        <div class="container">
+            <div class="row mb-4">
                 <div class="col-md-6">
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="Пошук наказів..." id="searchOrders">
-                        <button class="btn btn-primary" type="button">
+                        <button class="btn btn-primary" type="button" id="searchButton">
                             <i class="fas fa-search"></i>
                         </button>
                     </div>
@@ -60,15 +74,22 @@
                 <div class="col-md-6">
                     <select class="form-select" id="orderFilter">
                         <option value="all">Всі накази</option>
-                        <option value="2023">Кадрові дії</option>
-                        <option value="2022">Спец.Операції</option>
-                        <option value="2021">Рейди</option>
-                         <option value="2021">Кримінальні справи</option>
+                        <option value="Кримінальні справи">Кримінальні справи</option>
+                        <option value="Всі накази">Всі накази</option>
+                        <option value="Перевірка">Перевірка</option>
                     </select>
                 </div>
             </div>
 
- <div class="card mb-4 order-item" data-year="Кримінальні справи">
+            <!-- Повідомлення про відсутність результатів -->
+            <div class="no-results" id="noResults">
+                <i class="fas fa-search fa-3x mb-3"></i>
+                <h4>Накази не знайдено</h4>
+                <p>Спробуйте змінити параметри пошуку</p>
+            </div>
+
+            <div class="orders-list" id="ordersList">
+                <div class="card mb-4 order-item" data-category="Кримінальні справи" data-search="наказ 002 закриття кримінального провадження досудове розслідування окружний суд">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <h5 class="mb-0">Наказ №002 Заступника ГП від 26.11.2025</h5>
                         <span class="badge bg-primary">Новий</span>
@@ -82,17 +103,17 @@
                             <p><strong>Дата набрання чинності:</strong> 26.11.2025</p>
                         </div>
                         <div class="mt-3">
-                            <a href="#" class="btn btn-primary me-2">
-                                 <a href="https://cdn.discordapp.com/attachments/1195424658699325440/1443256270269190235/image.png?ex=692868a5&is=69271725&hm=22c2239dbc261d9e4f6c3ab3e3bd3feb36eca1a654a73e8fe9a3749f0234f93b&"_blank" class="btn btn-primary">Завантажити PDF</a>
+                            <a href="https://cdn.discordapp.com/attachments/1195424658699325440/1443256270269190235/image.png?ex=692868a5&is=69271725&hm=22c2239dbc261d9e4f6c3ab3e3bd3feb36eca1a654a73e8fe9a3749f0234f93b&" target="_blank" class="btn btn-primary me-2">
+                                <i class="fas fa-download me-1"></i>Завантажити PDF
                             </a>
-                            <a href="#" class="btn btn-outline-primary">
-                                <a href="https://forum.ukraine-gta.com.ua/threads/%D0%9D%D0%B0%D0%BA%D0%B0%D0%B7%D0%B8-%D0%BF%D1%80%D0%BE%D0%BA%D1%83%D1%80%D0%B0%D1%82%D1%83%D1%80%D0%B8-%D0%9F%D1%96%D0%B2%D0%BD%D1%96%D1%87%D0%BD%D0%B0-%D0%A3%D0%BA%D1%80%D0%B0%D1%97%D0%BD%D0%B0.253958/post-1384376"_blank" class="btn btn-primary">Переглянути онлайн</a>
+                            <a href="https://forum.ukraine-gta.com.ua/threads/%D0%9D%D0%B0%D0%BA%D0%B0%D0%B7%D0%B8-%D0%BF%D1%80%D0%BE%D0%BA%D1%83%D1%80%D0%B0%D1%82%D1%83%D1%80%D0%B8-%D0%9F%D1%96%D0%B2%D0%BD%D1%96%D1%87%D0%BD%D0%B0-%D0%A3%D0%BA%D1%80%D0%B0%D1%97%D0%BD%D0%B0.253958/post-1384376" target="_blank" class="btn btn-outline-primary">
+                                <i class="fas fa-eye me-1"></i>Переглянути онлайн
                             </a>
                         </div>
                     </div>
                 </div>
 
-             <div class="card mb-4 order-item" data-year="Всі накази">
+                <div class="card mb-4 order-item" data-category="Всі накази" data-search="наказ 003 затвердження офіційного сайту прокуратури">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <h5 class="mb-0">Наказ №003 Заступника ГП від 26.11.2025</h5>
                         <span class="badge bg-primary">Новий</span>
@@ -106,41 +127,42 @@
                             <p><strong>Дата набрання чинності:</strong> 26.11.2025</p>
                         </div>
                         <div class="mt-3">
-                            <a href="#" class="btn btn-primary me-2">
-                                 <a href="https://cdn.discordapp.com/attachments/1195424658699325440/1443303938165178490/image.png?ex=6928950a&is=6927438a&hm=850699a37d01ffcc340da45add569d5d98d4fb43bf8b8ae57f5715638c886b67&"_blank" class="btn btn-primary">Завантажити PDF</a>
+                            <a href="https://cdn.discordapp.com/attachments/1195424658699325440/1443303938165178490/image.png?ex=6928950a&is=6927438a&hm=850699a37d01ffcc340da45add569d5d98d4fb43bf8b8ae57f5715638c886b67&" target="_blank" class="btn btn-primary me-2">
+                                <i class="fas fa-download me-1"></i>Завантажити PDF
                             </a>
-                            <a href="#" class="btn btn-outline-primary">
-                                <a href="https://forum.ukraine-gta.com.ua/threads/%D0%9D%D0%B0%D0%BA%D0%B0%D0%B7%D0%B8-%D0%BF%D1%80%D0%BE%D0%BA%D1%83%D1%80%D0%B0%D1%82%D1%83%D1%80%D0%B8-%D0%9F%D1%96%D0%B2%D0%BD%D1%96%D1%87%D0%BD%D0%B0-%D0%A3%D0%BA%D1%80%D0%B0%D1%97%D0%BD%D0%B0.253958/post-1384603"_blank" class="btn btn-primary">Переглянути онлайн</a>
+                            <a href="https://forum.ukraine-gta.com.ua/threads/%D0%9D%D0%B0%D0%BA%D0%B0%D0%B7%D0%B8-%D0%BF%D1%80%D0%BE%D0%BA%D1%83%D1%80%D0%B0%D1%82%D1%83%D1%80%D0%B8-%D0%9F%D1%96%D0%B2%D0%BD%D1%96%D1%87%D0%BD%D0%B0-%D0%A3%D0%BA%D1%80%D0%B0%D1%97%D0%BD%D0%B0.253958/post-1384603" target="_blank" class="btn btn-outline-primary">
+                                <i class="fas fa-eye me-1"></i>Переглянути онлайн
                             </a>
                         </div>
                     </div>
                 </div>
-             <div class="card mb-4 order-item" data-year="Всі накази">
+
+                <div class="card mb-4 order-item" data-category="Перевірка" data-search="наказ 010 генерального прокурора проведення перевірки зсу збройні сили україни база знань">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <h5 class="mb-0">Наказ №010 Генерального прокурора від 26.11.2025</h5>
                         <span class="badge bg-primary">Новий</span>
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title">Про проведення перевірки Зброяним Силам України</h5>
-                        <p class="card-text">Наказ встановлює проведення перевірки ЗСУ для перевірки бази знань </p>
+                        <h5 class="card-title">Про проведення перевірки Збройним Силам України</h5>
+                        <p class="card-text">Наказ встановлює проведення перевірки ЗСУ для перевірки бази знань</p>
                         <div class="order-details">
                             <p><strong>Категорія:</strong> Перевірка</p>
                             <p><strong>Статус:</strong> Діючий</p>
                             <p><strong>Дата набрання чинності:</strong> 26.11.2025</p>
                         </div>
                         <div class="mt-3">
-                            <a href="#" class="btn btn-primary me-2">
-                                 <a href="https://cdn.discordapp.com/attachments/1443328236665966647/1443328255892521052/image.png?ex=6928abaf&is=69275a2f&hm=a0b72e8fbe05e59e9348d246e67311fd5a044d3dae6e46b78a7660200d869e05&"_blank" class="btn btn-primary">Завантажити PDF</a>
+                            <a href="https://cdn.discordapp.com/attachments/1443328236665966647/1443328255892521052/image.png?ex=6928abaf&is=69275a2f&hm=a0b72e8fbe05e59e9348d246e67311fd5a044d3dae6e46b78a7660200d869e05&" target="_blank" class="btn btn-primary me-2">
+                                <i class="fas fa-download me-1"></i>Завантажити PDF
                             </a>
-                            <a href="#" class="btn btn-outline-primary">
-                                <a href="https://forum.ukraine-gta.com.ua/threads/%D0%9D%D0%B0%D0%BA%D0%B0%D0%B7%D0%B8-%D0%BF%D1%80%D0%BE%D0%BA%D1%83%D1%80%D0%B0%D1%82%D1%83%D1%80%D0%B8-%D0%9F%D1%96%D0%B2%D0%BD%D1%96%D1%87%D0%BD%D0%B0-%D0%A3%D0%BA%D1%80%D0%B0%D1%97%D0%BD%D0%B0.253958/post-1384767"_blank" class="btn btn-primary">Переглянути онлайн</a>
+                            <a href="https://forum.ukraine-gta.com.ua/threads/%D0%9D%D0%B0%D0%BA%D0%B0%D0%B7%D0%B8-%D0%BF%D1%80%D0%BE%D0%BA%D1%83%D1%80%D0%B0%D1%82%D1%83%D1%80%D0%B8-%D0%9F%D1%96%D0%B2%D0%BD%D1%96%D1%87%D0%BD%D0%B0-%D0%A3%D0%BA%D1%80%D0%B0%D1%97%D0%BD%D0%B0.253958/post-1384767" target="_blank" class="btn btn-outline-primary">
+                                <i class="fas fa-eye me-1"></i>Переглянути онлайн
                             </a>
                         </div>
                     </div>
                 </div>
-            
-            <div class="orders-list">
-                <!-- Пагінація -->
+            </div>
+
+            <!-- Пагінація -->
             <nav aria-label="Навігація по сторінках">
                 <ul class="pagination justify-content-center">
                     <li class="page-item disabled">
@@ -157,7 +179,6 @@
         </div>
     </section>
 
-    <!-- Футер -->
     <footer class="footer">
         <div class="container">
             <div class="row">
@@ -184,35 +205,67 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
-        // Фільтрація наказів
-        document.getElementById('orderFilter').addEventListener('change', function() {
-            const year = this.value;
-            const orders = document.querySelectorAll('.order-item');
-            
-            orders.forEach(order => {
-                if (year === 'all' || order.getAttribute('data-year') === year) {
-                    order.style.display = 'block';
-                } else {
-                    order.style.display = 'none';
-                }
-            });
-        });
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('searchOrders');
+            const searchButton = document.getElementById('searchButton');
+            const orderFilter = document.getElementById('orderFilter');
+            const ordersList = document.getElementById('ordersList');
+            const noResults = document.getElementById('noResults');
+            const orderItems = document.querySelectorAll('.order-item');
 
-        // Пошук наказів
-        document.getElementById('searchOrders').addEventListener('input', function() {
-            const searchText = this.value.toLowerCase();
-            const orders = document.querySelectorAll('.order-item');
-            
-            orders.forEach(order => {
-                const text = order.textContent.toLowerCase();
-                if (text.includes(searchText)) {
-                    order.style.display = 'block';
+            // Функція для фільтрації наказів
+            function filterOrders() {
+                const searchText = searchInput.value.toLowerCase().trim();
+                const selectedCategory = orderFilter.value;
+                let visibleCount = 0;
+
+                orderItems.forEach(order => {
+                    const category = order.getAttribute('data-category');
+                    const searchData = order.getAttribute('data-search').toLowerCase();
+                    const orderText = order.textContent.toLowerCase();
+                    
+                    const matchesSearch = searchText === '' || 
+                                        searchData.includes(searchText) || 
+                                        orderText.includes(searchText);
+                    const matchesCategory = selectedCategory === 'all' || category === selectedCategory;
+
+                    if (matchesSearch && matchesCategory) {
+                        order.style.display = 'block';
+                        visibleCount++;
+                    } else {
+                        order.style.display = 'none';
+                    }
+                });
+
+                // Показати/приховати повідомлення про відсутність результатів
+                if (visibleCount === 0) {
+                    noResults.style.display = 'block';
                 } else {
-                    order.style.display = 'none';
+                    noResults.style.display = 'none';
+                }
+            }
+
+            // Обробники подій
+            searchInput.addEventListener('input', filterOrders);
+            searchButton.addEventListener('click', filterOrders);
+            orderFilter.addEventListener('change', filterOrders);
+
+            // Додатковий пошук при натисканні Enter
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    filterOrders();
                 }
             });
+
+            // Очистити пошук при подвійному кліку
+            searchInput.addEventListener('dblclick', function() {
+                this.value = '';
+                filterOrders();
+            });
+
+            // Ініціалізація
+            filterOrders();
         });
     </script>
 </body>
