@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Заяви - Генеральна Прокуратура</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-balance-scale me-2"></i>Генеральна Прокуратура
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Головна</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="news.html">Новини</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="staff.html">Керівництво</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="orders.html">Накази</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="applications.html">Заяви</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="page-header py-5 bg-primary text-white">
+        <div class="container">
+            <h1 class="display-4">Подати заяву</h1>
+            <p class="lead">Електронна форма для подання звернень до прокуратури</p>
+        </div>
+    </section>
+
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <!-- Інформація про подання заяв -->
+                    <div class="card mb-5">
+                        <div class="card-header bg-warning text-dark">
+                            <h5 class="mb-0"><i class="fas fa-exclamation-triangle me-2"></i>Важлива інформація</h5>
+                        </div>
+                        <div class="card-body">
+                            <p>Перш ніж подати заяву, будь ласка, ознайомтесь з такою інформацією:</p>
+                            <ul>
+                                <li>Заява повинна містити правдиву та перевірену інформацію</li>
+                                <li>Усі поля форми є обов'язковими для заповнення</li>
+                                <li>За надання завідомо неправдивих відомостей передбачена відповідальність</li>
+                                <li>Термін розгляду заяви - до 30 днів</li>
+                                <li>Про результат розгляду вас буде повідомлено за вказаними контактами</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Форма вибору типу заяви -->
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5 class="mb-0">Оберіть тип заяви</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="application-type mb-4">
+                                <h5><i class="fas fa-store me-2"></i>Заява на рейд на Центральний ринок</h5>
+                                <p>Подається у разі виявлення порушень торгівельних правил, санітарних норм або інших правопорушень на території Центрального ринку.</p>
+                                <button class="btn btn-primary select-application" data-type="Рейд на Центральний ринок">
+                                    Обрати цей тип
+                                </button>
+                            </div>
+                            
+                            <div class="application-type mb-4">
+                                <h5><i class="fas fa-shield-alt me-2"></i>Заява на рейд на Картель</h5>
+                                <p>Подається у разі підозри в діяльності організованих злочинних угруповань, незаконному обігу наркотиків або інших серйозних правопорушень.</p>
+                                <button class="btn btn-primary select-application" data-type="Рейд на Картель">
+                                    Обрати цей тип
+                                </button>
+                            </div>
+                            
+                            <div class="application-type mb-4">
+                                <h5><i class="fas fa-gavel me-2"></i>Заява у прокуратуру</h5>
+                                <p>Загальна форма заяви до органів прокуратури з будь-яких питань, що входять до її компетенції.</p>
+                                <button class="btn btn-primary select-application" data-type="Заява у прокуратуру">
+                                    Обрати цей тип
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Форма заяви -->
+                    <div class="card" id="applicationFormCard" style="display: none;">
+                        <div class="card-header">
+                            <h5 class="mb-0">Форма заяви: <span id="selectedApplicationType"></span></h5>
+                        </div>
+                        <div class="card-body">
+                            <form id="applicationForm">
+                                <div class="mb-3">
+                                    <label for="applicationType" class="form-label">Тип заяви *</label>
+                                    <input type="text" class="form-control" id="applicationType" readonly required>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="lastName" class="form-label">Прізвище *</label>
+                                        <input type="text" class="form-control" id="lastName" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="firstName" class="form-label">Ім'я *</label>
+                                        <input type="text" class="form-control" id="firstName" required>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="middleName" class="form-label">По батькові</label>
+                                        <input type="text" class="form-control" id="middleName">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="phone" class="form-label">Телефон *</label>
+                                        <input type="tel" class="form-control" id="phone" required>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email *</label>
+                                    <input type="email" class="form-control" id="email" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="address" class="form-label">Адреса проживання *</label>
+                                    <input type="text" class="form-control" id="address" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="subject" class="form-label">Тема звернення *</label>
+                                    <input type="text" class="form-control" id="subject" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="description" class="form-label">Опис ситуації *</label>
+                                    <textarea class="form-control" id="description" rows="6" required 
+                                              placeholder="Детально опишіть ситуацію, вкажіть місце, час, обставини події, інші важливі деталі..."></textarea>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="witnesses" class="form-label">Свідки (якщо є)</label>
+                                    <textarea class="form-control" id="witnesses" rows="2" 
+                                              placeholder="ПІБ свідків, їх контактні дані..."></textarea>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="file" class="form-label">Додати доказові матеріали</label>
+                                    <input type="file" class="form-control" id="file" multiple>
+                                    <div class="form-text">Можна завантажити фото, відео, документи (макс. розмір файлу - 10MB)</div>
+                                </div>
+
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input" id="consent" required>
+                                    <label class="form-check-label" for="consent">
+                                        Я погоджуюсь з обробкою моїх персональних даних та підтверджую достовірність наданої інформації *
+                                    </label>
+                                </div>
+
+                                <div class="d-grid gap-2">
+                                    <button type="submit" class="btn btn-primary btn-lg">Надіслати заяву</button>
+                                    <button type="button" class="btn btn-outline-secondary" id="cancelForm">Скасувати</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Контактна інформація -->
+                    <div class="card mt-5">
+                        <div class="card-body text-center">
+                            <h5>Альтернативні способи звернення</h5>
+                            <p>Якщо у вас виникають складнощі з заповненням електронної форми, ви можете звернутися до нас іншими способами:</p>
+                            <div class="row mt-4">
+                                <div class="col-md-4">
+                                    <i class="fas fa-envelope fa-2x text-primary mb-3"></i>
+                                    <h6>Поштова адреса</h6>
+                                    <p>вул. Липська, 15, м. Київ, 01001</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <i class="fas fa-phone fa-2x text-primary mb-3"></i>
+                                    <h6>Телефон гарячої лінії</h6>
+                                    <p>+38 (044) 123-45-67</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <i class="fas fa-user fa-2x text-primary mb-3"></i>
+                                    <h6>Особистий прийом</h6>
+                                    <p>Пн-Пт: 9:00-18:00</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5>Генеральна Прокуратура</h5>
+                    <p>Законність. Справедливість. Професіоналізм.</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Контакти</h5>
+                    <p><i class="fas fa-map-marker-alt me-2"></i>вул. Липська, 15, м. Київ</p>
+                    <p><i class="fas fa-phone me-2"></i>+38 (044) 123-45-67</p>
+                    <p><i class="fas fa-envelope me-2"></i>info@prosecutor.gov.ua</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Години роботи</h5>
+                    <p>Понеділок - П'ятниця: 9:00 - 18:00</p>
+                    <p>Субота - Неділя: Вихідний</p>
+                </div>
+            </div>
+            <hr class="bg-light">
+            <div class="text-center">
+                <p>&copy; 2023 Генеральна Прокуратура. Всі права захищені.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Модальне вікно підтвердження -->
+    <div class="modal fade" id="successModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Заяву успішно подано!</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center">
+                        <i class="fas fa-check-circle fa-3x text-success mb-3"></i>
+                        <p>Ваша заява отримана та зареєстрована під номером <strong id="applicationNumber"></strong>.</p>
+                        <p>Ми розглянемо її протягом 30 днів та повідомимо вас про результат за вказаними контактами.</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Зрозуміло</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Обробка вибору типу заяви
+        document.querySelectorAll('.select-application').forEach(button => {
+            button.addEventListener('click', function() {
+                const applicationType = this.getAttribute('data-type');
+                document.getElementById('applicationType').value = applicationType;
+                document.getElementById('selectedApplicationType').textContent = applicationType;
+                document.getElementById('applicationFormCard').style.display = 'block';
+                
+                // Прокрутка до форми
+                document.getElementById('applicationFormCard').scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Скасування форми
+        document.getElementById('cancelForm').addEventListener('click', function() {
+            document.getElementById('applicationFormCard').style.display = 'none';
+            document.getElementById('applicationForm').reset();
+        });
+
+        // Відправка форми
+        document.getElementById('applicationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Генерація номера заяви
+            const appNumber = 'APP-' + Date.now();
+            document.getElementById('applicationNumber').textContent = appNumber;
+            
+            // Показ модального вікна
+            const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+            successModal.show();
+            
+            // Скидання форми
+            this.reset();
+            document.getElementById('applicationFormCard').style.display = 'none';
+        });
+    </script>
+</body>
+</html>
