@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Генеральна Прокуратура</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #003366;
+            --secondary-blue: #004d99;
+            --accent-gold: #d4af37;
+            --light-gray: #f8f9fa;
+            --dark-gray: #343a40;
+        }
+        
+        body {
+            font-family: 'Georgia', serif;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .navbar {
+            background-color: var(--primary-blue);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .navbar-brand {
+            font-weight: bold;
+            color: white !important;
+            font-size: 1.5rem;
+        }
+        
+        .nav-link {
+            color: rgba(255,255,255,0.9) !important;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-link:hover {
+            color: var(--accent-gold) !important;
+        }
+        
+        .hero-section {
+            background: linear-gradient(rgba(0, 51, 102, 0.8), rgba(0, 51, 102, 0.9)), url('https://via.placeholder.com/1920x600') center/cover no-repeat;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+        
+        .section-title {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-bottom: 0.5rem;
+            color: var(--primary-blue);
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--accent-gold);
+        }
+        
+        .card {
+            border: none;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            margin-bottom: 1.5rem;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .card-header {
+            background-color: var(--primary-blue);
+            color: white;
+            font-weight: bold;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-blue);
+            border-color: var(--primary-blue);
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--secondary-blue);
+            border-color: var(--secondary-blue);
+        }
+        
+        .staff-card {
+            text-align: center;
+            padding: 1.5rem;
+        }
+        
+        .staff-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 1rem;
+            border: 3px solid var(--accent-gold);
+        }
+        
+        .footer {
+            background-color: var(--dark-gray);
+            color: white;
+            padding: 3rem 0;
+            margin-top: 3rem;
+        }
+        
+        .application-type {
+            border-left: 4px solid var(--primary-blue);
+            padding-left: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .news-date {
+            color: var(--secondary-blue);
+            font-size: 0.9rem;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary-blue);
+        }
+        
+        .stat-label {
+            font-size: 1rem;
+            color: var(--dark-gray);
+        }
+    </style>
+</head>
+<body>
+    <!-- Навігаційна панель -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-balance-scale me-2"></i>Генеральна Прокуратура
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Головна</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#news">Новини</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#staff">Керівництво</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#orders">Накази</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#applications">Заяви</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Головна секція -->
+    <section id="home" class="hero-section">
+        <div class="container">
+            <h1 class="display-4 mb-4">Генеральна Прокуратура</h1>
+            <p class="lead mb-4">Законність. Справедливість. Професіоналізм.</p>
+            <a href="#applications" class="btn btn-light btn-lg">Подати заяву</a>
+        </div>
+    </section>
+
+    <!-- Статистика -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-md-3 mb-4">
+                    <div class="stat-number">2457</div>
+                    <div class="stat-label">Справ завершено</div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="stat-number">128</div>
+                    <div class="stat-label">Прокурорів</div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="stat-number">94%</div>
+                    <div class="stat-label">Ефективність</div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="stat-number">15</div>
+                    <div class="stat-label">Років досвіду</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Новини -->
+    <section id="news" class="py-5">
+        <div class="container">
+            <h2 class="section-title">Останні новини</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <span class="news-date">15 червня 2023</span>
+                            <h5 class="card-title mt-2">Запобігли масштабній корупційній схемі</h5>
+                            <p class="card-text">Прокуратура завершила розслідування справи про корупцію у державному закупівлі...</p>
+                            <a href="#" class="btn btn-primary">Детальніше</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <span class="news-date">10 червня 2023</span>
+                            <h5 class="card-title mt-2">Нові заходи боротьби з організованою злочинністю</h5>
+                            <p class="card-text">Запроваджено нові методи протидії організованій злочинності в регіоні...</p>
+                            <a href="#" class="btn btn-primary">Детальніше</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <span class="news-date">5 червня 2023</span>
+                            <h5 class="card-title mt-2">Співпраця з міжнародними організаціями</h5>
+                            <p class="card-text">Підписано угоду про співпрацю з Європолом у боротьбі з кіберзлочинністю...</p>
+                            <a href="#" class="btn btn-primary">Детальніше</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <a href="#" class="btn btn-outline-primary">Всі новини</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Керівництво -->
+    <section id="staff" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title">Керівництво</h2>
+            <div class="row">
+                <!-- Генеральний прокурор -->
+                <div class="col-md-6 mb-4">
+                    <div class="card staff-card">
+                        <img src="https://via.placeholder.com/150" class="staff-img" alt="Генеральний прокурор">
+                        <h4>Іваненко Олександр Петрович</h4>
+                        <p class="text-muted">Генеральний прокурор</p>
+                        <p>Доктор юридичних наук, професор. Працює в органах прокуратури понад 20 років.</p>
+                    </div>
+                </div>
+                
+                <!-- Заступники -->
+                <div class="col-md-6 mb-4">
+                    <div class="card staff-card">
+                        <img src="https://via.placeholder.com/150" class="staff-img" alt="Заступник">
+                        <h4>Коваленко Марія Іванівна</h4>
+                        <p class="text-muted">Перший заступник Генерального прокурора</p>
+                        <p>Спеціалізується на боротьбі з корупцією та організованою злочинністю.</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 mb-4">
+                    <div class="card staff-card">
+                        <img src="https://via.placeholder.com/150" class="staff-img" alt="Заступник">
+                        <h4>Шевченко Андрій Володимирович</h4>
+                        <p class="text-muted">Заступник Генерального прокурора</p>
+                        <p>Відповідає за міжнародне співробітництво та кібербезпеку.</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 mb-4">
+                    <div class="card staff-card">
+                        <img src="https://via.placeholder.com/150" class="staff-img" alt="Заступник">
+                        <h4>Мельник Сергій Олегович</h4>
+                        <p class="text-muted">Заступник Генерального прокурора</p>
+                        <p>Курує питання нагляду за дотриманням законів органами влади.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-4">
+                <a href="#" class="btn btn-outline-primary">Всі співробітники</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Накази -->
+    <section id="orders" class="py-5">
+        <div class="container">
+            <h2 class="section-title">Накази</h2>
+            <div class="row">
+                <div class="col-md-8 mx-auto">
+                    <div class="card mb-4">
+                        <div class="card-header">Наказ №245 від 15.06.2023</div>
+                        <div class="card-body">
+                            <h5 class="card-title">Про затвердження Положення про організацію роботи зі зверненнями громадян</h5>
+                            <p class="card-text">Наказ встановлює порядок розгляду звернень громадян та строки їх розгляду.</p>
+                            <a href="#" class="btn btn-primary">Завантажити</a>
+                        </div>
+                    </div>
+                    
+                    <div class="card mb-4">
+                        <div class="card-header">Наказ №198 від 01.06.2023</div>
+                        <div class="card-body">
+                            <h5 class="card-title">Про заходи щодо покращення роботи з кадрами</h5>
+                            <p class="card-text">Наказ спрямований на вдосконалення системи підготовки та підвищення кваліфікації прокурорських працівників.</p>
+                            <a href="#" class="btn btn-primary">Завантажити</a>
+                        </div>
+                    </div>
+                    
+                    <div class="card mb-4">
+                        <div class="card-header">Наказ №156 від 20.05.2023</div>
+                        <div class="card-body">
+                            <h5 class="card-title">Про організацію взаємодії з правоохоронними органами</h5>
+                            <p class="card-text">Наказ визначає порядок взаємодії прокуратури з іншими правоохоронними органами.</p>
+                            <a href="#" class="btn btn-primary">Завантажити</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-4">
+                <a href="#" class="btn btn-outline-primary">Всі накази</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Заяви -->
+    <section id="applications" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title">Подати заяву</h2>
+            <div class="row">
+                <div class="col-md-8 mx-auto">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="mb-4">Оберіть тип заяви</h4>
+                            
+                            <div class="application-type">
+                                <h5>Заява на рейд на Центральний ринок</h5>
+                                <p>Подається у разі виявлення порушень торгівельних правил, санітарних норм або інших правопорушень на території Центрального ринку.</p>
+                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#applicationModal" data-type="Рейд на Центральний ринок">Подати заяву</button>
+                            </div>
+                            
+                            <div class="application-type">
+                                <h5>Заява на рейд на Картель</h5>
+                                <p>Подається у разі підозри в діяльності організованих злочинних угруповань, незаконному обігу наркотиків або інших серйозних правопорушень.</p>
+                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#applicationModal" data-type="Рейд на Картель">Подати заяву</button>
+                            </div>
+                            
+                            <div class="application-type">
+                                <h5>Заява у прокуратуру</h5>
+                                <p>Загальна форма заяви до органів прокуратури з будь-яких питань, що входять до її компетенції.</p>
+                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#applicationModal" data-type="Заява у прокуратуру">Подати заяву</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5>Генеральна Прокуратура</h5>
+                    <p>Законність. Справедливість. Професіоналізм.</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Контакти</h5>
+                    <p><i class="fas fa-map-marker-alt me-2"></i>вул. Липська, 15, м. Київ</p>
+                    <p><i class="fas fa-phone me-2"></i>+38 (044) 123-45-67</p>
+                    <p><i class="fas fa-envelope me-2"></i>info@prosecutor.gov.ua</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Години роботи</h5>
+                    <p>Понеділок - П'ятниця: 9:00 - 18:00</p>
+                    <p>Субота - Неділя: Вихідний</p>
+                </div>
+            </div>
+            <hr class="bg-light">
+            <div class="text-center">
+                <p>&copy; 2023 Генеральна Прокуратура. Всі права захищені.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Модальне вікно для заяв -->
+    <div class="modal fade" id="applicationModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Форма заяви</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="applicationForm">
+                        <div class="mb-3">
+                            <label for="applicationType" class="form-label">Тип заяви</label>
+                            <input type="text" class="form-control" id="applicationType" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="fullName" class="form-label">ПІБ</label>
+                            <input type="text" class="form-control" id="fullName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">Телефон</label>
+                            <input type="tel" class="form-control" id="phone" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="address" class="form-label">Адреса</label>
+                            <input type="text" class="form-control" id="address" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Опис ситуації</label>
+                            <textarea class="form-control" id="description" rows="5" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="file" class="form-label">Додати файли (за потреби)</label>
+                            <input type="file" class="form-control" id="file">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Скасувати</button>
+                    <button type="button" class="btn btn-primary" id="submitApplication">Надіслати заяву</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Обробка модального вікна заяв
+        const applicationModal = document.getElementById('applicationModal');
+        applicationModal.addEventListener('show.bs.modal', function (event) {
+            const button = event.relatedTarget;
+            const applicationType = button.getAttribute('data-type');
+            const modalTitle = applicationModal.querySelector('.modal-title');
+            const applicationTypeInput = document.getElementById('applicationType');
+            
+            modalTitle.textContent = 'Форма заяви: ' + applicationType;
+            applicationTypeInput.value = applicationType;
+        });
+        
+        // Обробка відправки форми
+        document.getElementById('submitApplication').addEventListener('click', function() {
+            const form = document.getElementById('applicationForm');
+            if (form.checkValidity()) {
+                alert('Ваша заява успішно подана! Ми зв\'яжемося з вами найближчим часом.');
+                const modal = bootstrap.Modal.getInstance(applicationModal);
+                modal.hide();
+                form.reset();
+            } else {
+                form.reportValidity();
+            }
+        });
+        
+        // Плавна прокрутка до розділів
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
