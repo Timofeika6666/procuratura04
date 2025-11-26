@@ -136,3 +136,91 @@ body {
     border-bottom: 1px solid #eee;
     padding-bottom: 2rem;
 }
+
+/* Додати до існуючого style.css */
+
+.page-header {
+    background: linear-gradient(rgba(0, 51, 102, 0.9), rgba(0, 51, 102, 0.8)), url('https://via.placeholder.com/1920x400') center/cover no-repeat;
+}
+
+.orders-list .card-header {
+    background-color: var(--primary-blue);
+    color: white;
+}
+
+.order-details {
+    background-color: var(--light-gray);
+    padding: 1rem;
+    border-radius: 0.25rem;
+    margin: 1rem 0;
+}
+
+.order-details p {
+    margin-bottom: 0.5rem;
+}
+
+.application-type {
+    border-left: 4px solid var(--primary-blue);
+    padding-left: 1rem;
+    margin-bottom: 2rem;
+    transition: all 0.3s ease;
+}
+
+.application-type:hover {
+    border-left-color: var(--accent-gold);
+    background-color: var(--light-gray);
+    padding-left: 1.5rem;
+}
+
+.select-application {
+    transition: all 0.3s ease;
+}
+
+.select-application:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* Адаптивність для мобільних пристроїв */
+@media (max-width: 768px) {
+    .staff-img {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .hero-section {
+        padding: 60px 0;
+    }
+    
+    .display-4 {
+        font-size: 2rem;
+    }
+}
+
+/* Анімації */
+.card {
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+}
+
+/* Специфічні стилі для форми */
+.form-control:focus {
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 0.2rem rgba(0, 51, 102, 0.25);
+}
+
+.btn-primary {
+    background-color: var(--primary-blue);
+    border-color: var(--primary-blue);
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: var(--secondary-blue);
+    border-color: var(--secondary-blue);
+    transform: translateY(-1px);
+}
